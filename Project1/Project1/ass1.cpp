@@ -74,19 +74,54 @@ void ass1::Display(Node* ptr)
 		Display(ptr->right);
 }
 
+void ass1::WriteToFile()
+{
+	if (root_)
+	{
+		ofstream outfile("Write.txt");
+		if (outfile.is_open())
+			WriteToFile(root_, outfile);
+		else cout << "Cannot open file to write in.\n";
+		outfile.close();
+	}
+	else
+		cout << "Tree is empty" << endl;
+}
+
+void ass1::WriteToFile(Node * ptr, ofstream& outfile)
+{
+	if (ptr->left)
+		WriteToFile(ptr->left, outfile);
+	// cout << ptr->count << " " << ptr->data << endl;
+		outfile << ptr->count << " " << ptr->data << endl;
+	if (ptr->right)
+		WriteToFile(ptr->right, outfile);
+}
+
 int main()
 {
 	ass1 yo;
 	cout << "hello" << endl;
 	ifstream file("Read.txt");
 	string str;
-	while (getline(file, str))
+	if (file.is_open()) 
 	{
-		// Process str
-		yo.Add(str);
-		// cout << str << endl;
+		while (getline(file, str))
+			{
+				// Process str
+				yo.Add(str);
+				// cout << str << endl;
+			}
+		file.close();
 	}
-	yo.Display();
+	
+	else cout << "Unable to open file\n";
+
+	yo.Display(); // here the function simply prints the words to the console
+	// we must have this function open the file and write to it then close
+	// should we rename it?
+	// no, maybe lets just clone it and call it something else, like WriteToFile
+	yo.WriteToFile();
 
 	cin.get();
 	return 0;

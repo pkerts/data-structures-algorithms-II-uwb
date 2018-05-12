@@ -24,11 +24,15 @@ protected:
 	void Add(string data, Node* ptr);
 	Node* CreateLeaf(string data);
 	void Display(Node* ptr);
+	void WriteToFile(Node* ptr, ofstream& outfile);
+
 public:
 	ass1();
 	~ass1();
 
 	void Add(string data);
 	void Display();
+	void WriteToFile();
+
 };
 
