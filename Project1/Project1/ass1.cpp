@@ -5,16 +5,19 @@
 
 using namespace std;
 
-ass1::ass1() : root_(nullptr)
+template <typename Key, typename Value>
+ass1<Key, Value>::ass1() : root_(nullptr)
 {
 }
 
-ass1::~ass1()
+template <typename Key, typename Value>
+ass1<Key, Value>::~ass1()
 {
 }
 
 // public add
-void ass1::Add(string data)
+template <typename Key, typename Value>
+void ass1<Key, Value>::Add(Key data)
 {
 	// lets add stuff to the tree
 	// first check if tree is empty
@@ -27,7 +30,8 @@ void ass1::Add(string data)
 }
 
 // priv add
-void ass1::Add(string data, Node * ptr)
+template <typename Key, typename Value>
+void ass1<Key, Value>::Add(Key data, Node * ptr)
 {
 	if (data < ptr->data)
 	{
@@ -47,7 +51,8 @@ void ass1::Add(string data, Node * ptr)
 	}
 }
 
-ass1::Node* ass1::CreateLeaf(string data)
+template <typename Key, typename Value>
+typename ass1<Key, Value>::Node* ass1<Key, Value>::CreateLeaf(Key data)
 {
 	Node* n = new Node;
 	n->data = data;
@@ -57,7 +62,8 @@ ass1::Node* ass1::CreateLeaf(string data)
 	return n;
 }
 
-void ass1::Display()
+template <typename Key, typename Value>
+void ass1<Key, Value>::Display()
 {
 	if (root_)
 		Display(root_);
@@ -65,7 +71,8 @@ void ass1::Display()
 		cout << "Tree is empty" << endl;
 }
 
-void ass1::Display(Node* ptr)
+template <typename Key, typename Value>
+void ass1<Key, Value>::Display(Node* ptr)
 {
 	if (ptr->left)
 		Display(ptr->left);
@@ -74,7 +81,8 @@ void ass1::Display(Node* ptr)
 		Display(ptr->right);
 }
 
-void ass1::WriteToFile()
+template <typename Key, typename Value>
+void ass1<Key, Value>::WriteToFile()
 {
 	if (root_)
 	{
@@ -88,7 +96,8 @@ void ass1::WriteToFile()
 		cout << "Tree is empty" << endl;
 }
 
-void ass1::WriteToFile(Node * ptr, ofstream& outfile)
+template <typename Key, typename Value>
+void ass1<Key, Value>::WriteToFile(Node * ptr, ofstream& outfile)
 {
 	if (ptr->left)
 		WriteToFile(ptr->left, outfile);
@@ -100,7 +109,7 @@ void ass1::WriteToFile(Node * ptr, ofstream& outfile)
 
 int main()
 {
-	ass1 yo;
+	ass1<string, int> yo;
 	cout << "hello" << endl;
 	ifstream file("Read.txt");
 	string str;
